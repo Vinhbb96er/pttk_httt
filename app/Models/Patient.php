@@ -19,6 +19,8 @@ class Patient extends Model
         'expiration_date',
     ];
 
+    public $incrementing = false;
+
     public function registrations()
     {
         return $this->hasMany(Registration::class);
@@ -27,5 +29,17 @@ class Patient extends Model
     public function medicalRecords()
     {
         return $this->hasMany(MedicalRecord::class);
+    }
+
+    public function setIdAttribute($value)
+    {
+        $pre =  config('settings.pre_id.patient');
+        $numberOf = $this->all()->count() + 1;
+        $length = 10 - strlen($pre . $numberOf);
+        for ($i = 0; $i < $length; $i++) {
+            $pre .= 0;
+        }
+
+        return $this->attributes['id'] = $pre . $numberOf;
     }
 }

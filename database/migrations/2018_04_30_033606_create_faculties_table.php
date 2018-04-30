@@ -14,7 +14,7 @@ class CreateFacultiesTable extends Migration
     public function up()
     {
         Schema::create('faculties', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->string('id')->unique()->primary();
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

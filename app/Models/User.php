@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,5 +55,22 @@ class User extends Authenticatable
     public function faculty()
     {
         return $this->belongsTo(Faculty::class);
+    }
+
+    public function setPassword($value)
+    {
+        return $this->attributes['password'] = brypt($value);
+    }
+
+    public function setIdAttribute($value)
+    {
+        $pre = config('settings.pre_id.staff');
+        $numberOf = $this->all()->count() + 1;
+        $length = 10 - strlen($pre . $numberOf);
+        for ($i = 0; $i < $length; $i++) {
+            $pre .= 0;
+        }
+
+        return $this->attributes['id'] = $pre . $numberOf;
     }
 }

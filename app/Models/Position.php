@@ -11,8 +11,22 @@ class Position extends Model
         'name',
     ];
 
+    public $incrementing = false;
+
     public function users()
     {
         $this->hasMany(User::class);
+    }
+
+    public function setIdAttribute($value)
+    {
+        $pre = config('settings.pre_id.position');
+        $numberOf = $this->all()->count() + 1;
+        $length = 10 - strlen($pre . $numberOf);
+        for ($i = 0; $i < $length; $i++) {
+            $pre .= 0;
+        }
+
+        return $this->attributes['id'] = $pre . $numberOf;
     }
 }
