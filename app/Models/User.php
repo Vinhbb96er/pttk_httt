@@ -15,7 +15,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'position_id',
+        'faculty_id',
+        'name',
+        'birthday',
+        'gender',
+        'address',
+        'phone',
+        'email',
+        'image',
+        'participation_date',
+        'role',
+        'account',
+        'password',
     ];
 
     /**
@@ -24,6 +37,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'id',
+        'password',
+        'remember_token',
     ];
+
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
 }
