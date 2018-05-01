@@ -1,20 +1,7 @@
-﻿/* JS */
-
-
-/* Navigation */
+﻿
 
 $(document).ready(function(){
-/*
-  $(window).resize(function()
-  {
-    if($(window).width() >= 765){
-      $(".sidebar #nav").slideDown(350);
-    }
-    else{
-      $(".sidebar #nav").slideUp(350); 
-    }
-  }); */
-  
+
    $(".has_sub > a").click(function(e){
     e.preventDefault();
     var menu_li = $(this).parent("li");
@@ -100,279 +87,174 @@ $('.wminimize').click(function(e){
 	  $(this).children('i').addClass('fa fa-chevron-up');
 	}            
 	$wcontent.toggle(500);
-}); 
+});
 
-/* Calendar */
-
-$(document).ready(function() {
-  
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,next'
-      },
-      editable: true,
-      events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1)
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d-5),
-          end: new Date(y, m, d-2)
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d-3, 16, 0),
-          allDay: false
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: new Date(y, m, d+4, 16, 0),
-          allDay: false
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d+1, 19, 0),
-          end: new Date(y, m, d+1, 22, 30),
-          allDay: false
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/'
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-      ]
     });
-    
 });
 
-/* Progressbar animation */
+$(document).ready(function () {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-setTimeout(function(){
+            reader.onload = function(e) {
+                $('#img-preview').attr('src', e.target.result);
+            }
 
-	$('.progress-animated .progress-bar').each(function() {
-		var me = $(this);
-		var perc = me.attr("data-percentage");
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-		//TODO: left and right text handling
+    $("#img-upload").on('change' , function() {
+        readURL(this);
+    });
 
-		var current_perc = 0;
+    // lock-actice staff
+    $('#lock-staff').on('click', function () {
+        var status = $(this).attr('val');
+        var staffId = $(this).attr('data-staff');
+        var url = $(this).attr('data-url');
 
-		var progress = setInterval(function() {
-			if (current_perc>=perc) {
-				clearInterval(progress);
-			} else {
-				current_perc +=1;
-				me.css('width', (current_perc)+'%');
-			}
+        $.ajax({
+            url: url,
+            method: 'POST',
+            type: 'json',
+            data: {
+                status: status,
+                staffId: staffId,
+            },
+            success: function (data) {
+                if (data.success) {
+                    $('#staff-status').removeClass('status-0');
+                    $('#staff-status').removeClass('status-1');
+                    $('#staff-status').addClass('status-' + data.status);
+                    $('#staff-status').text(data.content);
+                
+                    $('#lock-staff').removeClass('btn-lock-0');
+                    $('#lock-staff').removeClass('btn-lock-1');
+                    $('#lock-staff').addClass('btn-lock-' + data.status);
+                    $('#lock-staff').attr('val', data.status)
 
-			me.text((current_perc)+'%');
+                    if (data.status) {
+                        $('#lock-staff').text('Khóa');
+                    } else {
+                        $('#lock-staff').text('Mở khóa');
+                    }
+                }
+            }
+        });
+    });
 
-		}, 200);
+    // search staff
+    $('#search-box').on('keyup', function () {
+        var searchData = $(this).val();
+        var condition = $('#condition-search').val();
+        var url = $(this).attr('data-url');
 
-	});
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                searchData: searchData,
+                condition: condition,
+            },
+            success: function (data) {
+                $('#staffs-data').html(data);
+            }
+        });
+    });
 
-},1200);
+    $('#condition-search').on('change', function () {
+        var searchData = $('#search-box').val();
+        var condition = $(this).val();
+        var url = $('#search-box').attr('data-url');
 
-/* Slider */
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                searchData: searchData,
+                condition: condition,
+            },
+            success: function (data) {
+                $('#staffs-data').html(data);
+            }
+        });
+    });
 
-$(function() {
-	// Horizontal slider
-	$( "#master1, #master2" ).slider({
-		value: 60,
-		orientation: "horizontal",
-		range: "min",
-		animate: true
-	});
+    // delete all staff
+    $('.checkbox-delete-all').on('click', function () {
+        var check = $(this).prop('checked');
 
-	$( "#master4, #master3" ).slider({
-		value: 80,
-		orientation: "horizontal",
-		range: "min",
-		animate: true
-	});        
+        $('.checkbox-delete').each(function () {
+            $(this).prop('checked', check ? 'checked' : '');
+        });
+    });
 
-	$("#master5, #master6").slider({
-		range: true,
-		min: 0,
-		max: 400,
-		values: [ 75, 200 ],
-		slide: function( event, ui ) {
-			$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-		}
-	});
+    $('.checkbox-delete').on('click', function () {
+        var checks = [];
 
+        $('.checkbox-delete').each(function () {
+            if ($(this).prop('checked')) {
+                checks.push(1);
+            }
+        });
 
-	// Vertical slider 
-	$( "#eq > span" ).each(function() {
-		// read initial values from markup and remove that
-		var value = parseInt( $( this ).text(), 10 );
-		$( this ).empty().slider({
-			value: value,
-			range: "min",
-			animate: true,
-			orientation: "vertical"
-		});
-	});
+        if (checks.length == 0 || checks.length != $('.checkbox-delete').length) {
+            $('.checkbox-delete-all').prop('checked', '');
+        } else if (checks.length == $('.checkbox-delete').length) {
+            $('.checkbox-delete-all').prop('checked', 'checked');
+        }
+    });
+
+    $('#delete-all-staffs').on('click', function () {
+        var staffsId = [];
+        var url = $(this).attr('data-url');
+
+        $('.checkbox-delete').each(function () {
+            if ($(this).prop('checked')) {
+                staffsId.push($(this).attr('val'));
+            }
+        });
+
+        if (!staffsId.length) {
+            alert('Bạn chưa chọn dòng để xóa!')
+            return false;
+        }
+
+        if (!confirm('Bạn có chắc chắn muốn xóa nhân viên đã chọn và toàn bộ dữ liệu liên quan?')) {
+            return false;
+        }
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                staffsId: staffsId
+            }, 
+            success: function (data) {}
+        });
+    });
 });
 
 
-
-/* Support */
-
-$(document).ready(function(){
-  $("#slist a").click(function(e){
-     e.preventDefault();
-     $(this).next('p').toggle(200);
-  });
-});
-
-/* Scroll to Top */
-
-
-$(".totop").hide();
-
-$(function(){
-	$(window).scroll(function(){
-	  if ($(this).scrollTop()>300)
-	  {
-		$('.totop').fadeIn();
-	  } 
-	  else
-	  {
-		$('.totop').fadeOut();
-	  }
-	});
-
-	$('.totop a').click(function (e) {
-	  e.preventDefault();
-	  $('body,html').animate({scrollTop: 0}, 500);
-	});
-
-});
-
-/* jQuery Notification */
-
-$(document).ready(function(){
-
-  setTimeout(function() {noty({text: '<strong>Howdy! Hope you are doing good...</strong>',layout:'topRight',type:'information',timeout:15000});}, 7000);
-
-  setTimeout(function() {noty({text: 'This is an all in one theme which includes Front End, Admin & E-Commerce. Dont miss it. Grab it now',layout:'topRight',type:'alert',timeout:13000});}, 9000);
-
-});
-
-
-$(document).ready(function() {
-
-  $('.noty-alert').click(function (e) {
-      e.preventDefault();
-      noty({text: 'Some notifications goes here...',layout:'topRight',type:'alert',timeout:2000});
-  });
-
-  $('.noty-success').click(function (e) {
-      e.preventDefault();
-      noty({text: 'Some notifications goes here...',layout:'top',type:'success',timeout:2000});
-  });
-
-  $('.noty-error').click(function (e) {
-      e.preventDefault();
-      noty({text: 'Some notifications goes here...',layout:'topRight',type:'error',timeout:2000});
-  });
-
-  $('.noty-warning').click(function (e) {
-      e.preventDefault();
-      noty({text: 'Some notifications goes here...',layout:'bottom',type:'warning',timeout:2000});
-  });
-
-  $('.noty-information').click(function (e) {
-      e.preventDefault();
-      noty({text: 'Some notifications goes here...',layout:'topRight',type:'information',timeout:2000});
-  });
-
-});
 
 
 /* Date picker */
 
-$(function() {
-    $('#datetimepicker1').datetimepicker({
-      pickTime: false
-    });
-});
+// $(function() {
+//     $('#datetimepicker1').datetimepicker({
+//       pickTime: false
+//     });
+// });
 
-$(function() {
-    $('#datetimepicker2').datetimepicker({
-      pickDate: false
-    });
-});
-
-/* On Off pllugin */  
-  
-$(document).ready(function() {
-  $('.toggleBtn').onoff();
-});
-
-
-/* CL Editor */
-
-$(".cleditor").cleditor({
-    width: "auto",
-    height: "auto"
-});
-
-/* Modal fix */
-
-$('.modal').appendTo($('body'));
-
-/* Pretty Photo for Gallery*/
-
-jQuery("a[class^='prettyPhoto']").prettyPhoto({
-overlay_gallery: false, social_tools: false
-});
-
-/* Slim Scroll */
-
-/* Slim scroll for chat widget */
-
-$('.scroll-chat').slimscroll({
-  height: '350px',
-  color: 'rgba(0,0,0,0.3)',
-  size: '5px'
-});
-
-/* Data tables */
-
-$(document).ready(function() {
-	$('#data-table-1').dataTable({
-	   "sPaginationType": "full_numbers"
-	});
-});
-
-
-
-
-
-
-
+// $(function() {
+//     $('#datetimepicker2').datetimepicker({
+//       pickDate: false
+//     });
+// });

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hash;
+use File;
 
 class User extends Authenticatable
 {
@@ -25,11 +27,13 @@ class User extends Authenticatable
         'phone',
         'email',
         'image',
-        'participation_date',
         'role',
         'account',
         'password',
+        'status',
     ];
+
+    public $incrementing = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -37,9 +41,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'id',
         'password',
         'remember_token',
+    ];
+
+    protected $appends = [
+        'role_content',
+        'image_path',
     ];
 
     public function medicalRecords()
@@ -57,9 +65,9 @@ class User extends Authenticatable
         return $this->belongsTo(Faculty::class);
     }
 
-    public function setPassword($value)
+    public function setPasswordAttribute($value)
     {
-        return $this->attributes['password'] = brypt($value);
+        return $this->attributes['password'] = Hash::make($value);
     }
 
     public function setIdAttribute($value)
@@ -72,5 +80,33 @@ class User extends Authenticatable
         }
 
         return $this->attributes['id'] = $pre . $numberOf;
+    }
+
+    public function getRoleContentAttribute()
+    {
+        if (!$this->attributes['status']) {
+            return $this->attributes['role_content'] = 'Bị khóa';
+        }
+
+        switch ($this->attributes['role']) {
+            case config('settings.staff_role.super_admin'):
+                return $this->attributes['role_content'] = 'Super Admin';
+            case config('settings.staff_role.admin'):
+                return $this->attributes['role_content'] = 'Admin';
+            case config('settings.staff_role.front_desk_staff'):
+                return $this->attributes['role_content'] = 'Nv Tiếp nhận';
+            case config('settings.staff_role.faculty_staff'):
+                $faculty = $this->find($this->attributes['id'])->faculty->name;
+                return $this->attributes['role_content'] = 'Nv Khoa ' . $faculty;
+        }
+    }
+
+    public function getImagePathAttribute()
+    {
+        if (!File::exists(public_path($this->attributes['image'])) || empty($this->attributes['image'])) {
+            return config('settings.image_default.no_image');
+        }
+
+        return $this->attributes['image']; 
     }
 }

@@ -6,6 +6,7 @@
     <!-- Title and other stuffs -->
     <title>Dashboard - MacAdmin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Css -->
     {{ Html::style('css/app.css') }}
@@ -20,23 +21,32 @@
             <!-- Navigation starts -->
             <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown pull-right">            
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <i class="fa fa-user"></i> Admin <b class="caret"></b>
-                        </a>
-
-                        <!-- Dropdown menu -->
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-user"></i> Profile</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-cogs"></i> Settings</a>
-                            </li>
-                            <li>
-                                <a href="login.html"><i class="fa fa-sign-out"></i> Logout</a>
-                            </li>
-                        </ul>
+                    <li class="dropdown pull-right">
+                        @auth
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <i class="fa fa-user"></i> 
+                              {{ Auth::user()->name }} <b class="caret"></b>
+                            </a>
+                            <!-- Dropdown menu -->
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#"><i class="fa fa-user"></i> Profile</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-cogs"></i> Settings</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out"></i> 
+                                        Logout
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        @endauth
                     </li>
                 </ul>
             </nav>

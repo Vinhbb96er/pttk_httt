@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layout.master');
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::resource('/staffs', 'StaffController');
+
+Route::post('/ajax/change-status', 'StaffController@changeStatus')->name('change_status');
+
+Route::post('/ajax/search-staff', 'StaffController@search')->name('search_staff');
+
+Route::post('/ajax/delete-staffs', 'StaffController@deleteMulti')->name('delete-staffs');

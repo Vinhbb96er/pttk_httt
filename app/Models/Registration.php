@@ -12,6 +12,8 @@ class Registration extends Model
         'create_date',
     ];
 
+    public $incrementing = false;
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);
