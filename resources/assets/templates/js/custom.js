@@ -98,6 +98,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $('.pagination').addClass('pagination-sm pull-right');
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

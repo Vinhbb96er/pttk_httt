@@ -38,7 +38,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="widget-content">
+                <div class="widget-content" id="staffs-data">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -56,7 +56,7 @@
                                     <th width="14%">Thao tác</th>
                                 </tr>
                             </thead>
-                            <tbody id="staffs-data">
+                            <tbody>
                                 @foreach ($staffs as $staff)
                                     <tr>
                                         <td>
@@ -67,11 +67,11 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $staff->id }}</td>
                                         <td>{{ $staff->name }}</td>
-                                        <td>{{ $staff->faculty->name }}</td>
-                                        <td>{{ $staff->position->name }}</td>
+                                        <td>{{ str_limit($staff->faculty->name, 10) }}</td>
+                                        <td>{{ str_limit($staff->position->name, 10) }}</td>
                                         <td>
                                             <span class="label label-{{ $staff->role }} status-{{ $staff->status }}">
-                                                {{ $staff->role_content }}
+                                                {{ str_limit($staff->role_content, 12) }}
                                             </span>
                                         </td>
                                         <td>{{ $staff->phone }}</td>

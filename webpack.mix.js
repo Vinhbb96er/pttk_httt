@@ -14,5 +14,6 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .js('resources/assets/templates/js/custom.js', 'public/templates/js')
+   .js('resources/assets/templates/js/search.js', 'public/templates/js')
    .copy('resources/assets/templates/css/style.css', 'public/templates/css')
    .copyDirectory('resources/assets/templates/img', 'public/templates/img');

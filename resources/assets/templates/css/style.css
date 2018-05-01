@@ -792,7 +792,8 @@ header .header-data .hdata em{
   display: block; 
   background: none;
   padding: 10px 0px;
-  padding-left: 30px;
+  padding-left: 45px;
+  font-size: 14px;
   text-decoration: none;
   color: #777;
   border-bottom: 1px solid #ddd;
@@ -1052,6 +1053,11 @@ table.dataTable thead .sorting_desc_disabled {
 .widget .table.table-bordered tr th{
 	border-top:0px;
 	border-left:0px;
+    text-align: center;
+}
+
+.widget .table.table-bordered tr td {
+    text-align: center;
 }
 
 .widget .table.table-bordered tr th:last-child{
@@ -2057,4 +2063,23 @@ footer .copy{
 
 .search-block {
     margin-left: 20%;
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    font-size: 16px;
+}
+
+.menu-icon-right {
+    width: 10px !important;
+}
+
+.avatar {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-menu {
+    padding: 7px 20px !important;
 }

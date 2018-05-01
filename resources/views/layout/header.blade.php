@@ -23,9 +23,9 @@
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown pull-right">
                         @auth
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                              <i class="fa fa-user"></i> 
-                              {{ Auth::user()->name }} <b class="caret"></b>
+                            <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#">
+                                <img src="{{ Auth::user()->image_path }}" class="avatar"> 
+                                {{ Auth::user()->name }} <b class="caret"></b>
                             </a>
                             <!-- Dropdown menu -->
                             <ul class="dropdown-menu">
@@ -79,29 +79,44 @@
             <div class="sidebar-dropdown"><a href="#">Menu</a></div>
             <!--- Sidebar navigation -->
             <ul id="nav">
-              <!-- Main menu with font awesome icon -->
-              <li class="open">
-                <a href="index.html"><i class="fa fa-home"></i> Dashboard</a>
-              </li>
-              <li class="has_sub">
-                <a href="#"><i class="fa fa-list-alt"></i> Widgets  <span class="pull-right"><i class="fa fa-chevron-right"></i></span></a>
-                <ul>
-                  <li><a href="widgets1.html">Widgets #1</a></li>
-                  <li><a href="widgets2.html">Widgets #2</a></li>
-                  <li><a href="widgets3.html">Widgets #3</a></li>
-                </ul>
-              </li>  
-              <li class="has_sub">
-                <a href="#"><i class="fa fa-file-o"></i> Pages #1  <span class="pull-right"><i class="fa fa-chevron-right"></i></span></a>
-                <ul>
-                  <li><a href="post.html">Post</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="register.html">Register</a></li>
-                  <li><a href="support.html">Support</a></li>
-                  <li><a href="invoice.html">Invoice</a></li>
-                  <li><a href="gallery.html">Gallery</a></li>
-                </ul>
-              </li>
+                <!-- Main menu with font awesome icon -->
+                <li class="open">
+                    <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="has_sub">
+                    <a href="#">
+                        <i class="fa fa-user"></i> 
+                        Quản lý Nhân viên 
+                        <span class="pull-right">
+                            <i class="fa fa-chevron-right menu-icon-right"></i>
+                        </span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('staffs.index') }}"> Danh sách nhân viên</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('staffs.create') }}"> Thêm nhân viên</a>
+                        </li>
+                    </ul>
+                </li>  
+                <li class="has_sub">
+                    <a href="#">
+                        <i class="fa fa-file-o"></i> 
+                        Pages #1  
+                        <span class="pull-right">
+                            <i class="fa fa-chevron-right menu-icon-right"></i>
+                        </span>
+                    </a>
+                    <ul>
+                        <li><a href="post.html">Post</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="invoice.html">Invoice</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- Sidebar ends -->
