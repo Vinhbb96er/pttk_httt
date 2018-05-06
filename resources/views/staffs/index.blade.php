@@ -10,7 +10,7 @@
                         <a class="btn add-btn" href="{{ route('staffs.create') }}"><i class="fa fa-plus"></i> Thêm </a>
                     </div>
                     <div class="pull-left">
-                        <a class="btn delete-all-btn" href="" id="delete-all-staffs" data-url="{{ route('delete-staffs') }}">
+                        <a class="btn delete-all-btn" href="" id="delete-all-btn" data-url="{{ route('delete_staff') }}">
                             <i class="fa fa-trash"></i> Xóa tất cả 
                         </a>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="widget-content" id="staffs-data">
+                <div class="widget-content" id="show-data">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -52,7 +52,7 @@
                                     <th width="15%">Khoa</th>
                                     <th width="15%">Chức vụ</th>
                                     <th width="13%">Quyền hạn</th>
-                                    <th width="13%">Số điện thoại</th>
+                                    <th width="13%">SĐT</th>
                                     <th width="14%">Thao tác</th>
                                 </tr>
                             </thead>
@@ -78,7 +78,7 @@
                                         <td>
                                             @if (($staff->role == config('settings.staff_role.super_admin') && Auth::user()->role == config('settings.staff_role.super_admin')) || $staff->role != config('settings.staff_role.super_admin'))
                                                 <a href="{{ route('staffs.show', $staff->id) }}" class="btn btn-sm btn-success">
-                                                    <i class="fa fa-check"></i> 
+                                                    <i class="fa fa-eye"></i> 
                                                 </a>
                                                 <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </a>
                                                 @if ($staff->id != Auth::user()->id)

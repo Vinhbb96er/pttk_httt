@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
 use File;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -34,6 +36,7 @@ class User extends Authenticatable
     ];
 
     public $incrementing = false;
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -48,6 +51,8 @@ class User extends Authenticatable
     protected $appends = [
         'role_content',
         'image_path',
+        'gender_content',
+        'birthday_format',
     ];
 
     public function medicalRecords()
@@ -108,5 +113,17 @@ class User extends Authenticatable
         }
 
         return $this->attributes['image']; 
+    }
+
+    public function getGenderContentAttribute()
+    {
+        return $this->attributes['gender'] ? 'Nam' : 'Nữ'; 
+    }
+
+    public function getBirthdayFormatAttribute()
+    {
+        if (!empty($this->attributes['birthday'])) {
+            return Carbon::parse($this->attributes['birthday'])->format('d/m/Y');
+        }
     }
 }

@@ -43,13 +43,13 @@
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Ngày sinh:</label>
                                     <label class="col-lg-9 control-label">
-                                        {{ $staff->birthday }}
+                                        {{ $staff->birthday_format }}
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Giới tính:</label>
                                     <label class="col-lg-5 control-label">
-                                        {{ $staff->gender }}
+                                        {{ $staff->gender_content }}
                                     </label>
                                 </div>
                                 <div class="form-group">
@@ -80,12 +80,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <img src="{{ $staff->image_path }}" id="img-preview" >
+                                <img src="{{ $staff->image_path }}" id="img-preview">
                             </div>
                             <div class="form-group col-lg-12">
                                 <div class="form-btn-block">
                                     <a href="{{ route('staffs.index') }}" class="btn btn-md btn-default">Trở về</a>
-                                    <button type="submit" class="btn btn-md btn-info">Chỉnh sửa</button>
+                                    <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-md btn-info">Chỉnh sửa</a>
                                     @if ($staff->id != Auth::user()->id && $staff->role != config('settings.staff_role.super_admin'))
                                         <button class="btn btn-md btn-lock-{{ $staff->status }}" id="lock-staff" val="{{ $staff->status }}" data-url="{{ route('change_status') }}" data-staff="{{ $staff->id }}">
                                             {{ ($staff->status) ? 'Khóa' : 'Mở khóa' }}

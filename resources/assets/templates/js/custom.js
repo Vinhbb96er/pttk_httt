@@ -99,6 +99,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('.pagination').addClass('pagination-sm pull-right');
+    $('.alert').delay(2500).hide('800');
 
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -166,7 +167,7 @@ $(document).ready(function () {
                 condition: condition,
             },
             success: function (data) {
-                $('#staffs-data').html(data);
+                $('#show-data').html(data);
             }
         });
     });
@@ -184,7 +185,7 @@ $(document).ready(function () {
                 condition: condition,
             },
             success: function (data) {
-                $('#staffs-data').html(data);
+                $('#show-data').html(data);
             }
         });
     });
@@ -214,22 +215,22 @@ $(document).ready(function () {
         }
     });
 
-    $('#delete-all-staffs').on('click', function () {
-        var staffsId = [];
+    $('#delete-all-btn').on('click', function () {
+        var dataId = [];
         var url = $(this).attr('data-url');
 
         $('.checkbox-delete').each(function () {
             if ($(this).prop('checked')) {
-                staffsId.push($(this).attr('val'));
+                dataId.push($(this).attr('val'));
             }
         });
 
-        if (!staffsId.length) {
+        if (!dataId.length) {
             alert('Bạn chưa chọn dòng để xóa!')
             return false;
         }
 
-        if (!confirm('Bạn có chắc chắn muốn xóa nhân viên đã chọn và toàn bộ dữ liệu liên quan?')) {
+        if (!confirm('Bạn có chắc chắn muốn xóa dòng đã chọn và toàn bộ dữ liệu liên quan?')) {
             return false;
         }
 
@@ -237,7 +238,7 @@ $(document).ready(function () {
             url: url,
             method: 'POST',
             data: {
-                staffsId: staffsId
+                dataId: dataId
             }, 
             success: function (data) {}
         });

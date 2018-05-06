@@ -14,7 +14,7 @@
                 <th width="15%">Khoa</th>
                 <th width="15%">Chức vụ</th>
                 <th width="13%">Quyền hạn</th>
-                <th width="13%">Số điện thoại</th>
+                <th width="13%">SĐT</th>
                 <th width="14%">Thao tác</th>
             </tr>
         </thead>
@@ -40,7 +40,7 @@
                     <td>
                         @if (($staff->role == config('settings.staff_role.super_admin') && Auth::user()->role == config('settings.staff_role.super_admin')) || $staff->role != config('settings.staff_role.super_admin'))
                             <a href="{{ route('staffs.show', $staff->id) }}" class="btn btn-sm btn-success">
-                                <i class="fa fa-check"></i> 
+                                <i class="fa fa-eye"></i> 
                             </a>
                             <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </a>
                             @if ($staff->id != Auth::user()->id)
@@ -60,8 +60,4 @@
             @endif
         </tbody>
     </table>
-</div>
-<div class="widget-foot">
-    {{ $staffs->links() }}
-    <div class="clearfix"></div> 
 </div>

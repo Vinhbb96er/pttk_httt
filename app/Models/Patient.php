@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use File;
+use Carbon\Carbon;
 
 class Patient extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'id',
         'name',
@@ -20,6 +25,15 @@ class Patient extends Model
     ];
 
     public $incrementing = false;
+    protected $dates = ['deleted_at'];
+
+    protected $appends = [
+        'image_path',
+        'gender_content',
+        'birthday_format',
+        'reception_date_format',
+        'expiration_date_format',
+    ];
 
     public function registrations()
     {
@@ -41,5 +55,40 @@ class Patient extends Model
         }
 
         return $this->attributes['id'] = $pre . $numberOf;
+    }
+
+    public function getImagePathAttribute()
+    {
+        if (!File::exists(public_path($this->attributes['image'])) || empty($this->attributes['image'])) {
+            return config('settings.image_default.no_image');
+        }
+
+        return $this->attributes['image']; 
+    }
+
+    public function getGenderContentAttribute()
+    {
+        return $this->attributes['gender'] ? 'Nam' : 'Nữ'; 
+    }
+
+    public function getBirthdayFormatAttribute()
+    {
+        if (!empty($this->attributes['birthday'])) {
+            return Carbon::parse($this->attributes['birthday'])->format('d/m/Y');
+        }
+    }
+
+    public function getExpirationDateFormatAttribute()
+    {
+        if (!empty($this->attributes['expiration_date'])) {
+            return Carbon::parse($this->attributes['expiration_date'])->format('d/m/Y');
+        }
+    }
+
+    public function getReceptionDateFormatAttribute()
+    {
+        if (!empty($this->attributes['reception_date'])) {
+            return Carbon::parse($this->attributes['reception_date'])->format('d/m/Y');
+        }
     }
 }

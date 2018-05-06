@@ -2083,3 +2083,42 @@ footer .copy{
 .user-menu {
     padding: 7px 20px !important;
 }
+
+.insurance-block {
+    margin-bottom: 0 !important;
+}
+
+.insurance-block-right {
+    padding-right: 0 !important;
+}
+
+.deadline-insurance {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.insurance-label {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0;
+}
+
+.date-input-insurance {
+    padding: 0 !important;
+}
+
+.medical-status-1 {
+    background-color: #26d626;
+}
+
+.medical-status-2 {
+    background-color: #13a6de;
+}
+
+.medical-status-3 {
+    background-color: #ef902e;
+}
+
+.medical-status-4 {
+    background-color: #b22ee8;
+}

@@ -25,8 +25,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staffs = User::orderBy('created_at', 'asc')
-            ->paginate(config('settings.paginate_default_val'));
+        $staffs = User::paginate(config('settings.paginate_default_val'));
 
         return view('staffs.index', compact('staffs'));
     }
@@ -106,7 +105,6 @@ class StaffController extends Controller
         } catch (Exception $e) {
             return redirect()->route('404');
         }
-        
     }
 
     /**
@@ -168,7 +166,7 @@ class StaffController extends Controller
                 }
             }
 
-            $staff->update($data);
+            $staff = $staff->update($data);
 
             if ($staff) {
                 $request->session()->flash('successMsg', 'Cập nhật nhân viên thành công');
@@ -261,19 +259,16 @@ class StaffController extends Controller
                     ->orWhereIn('faculty_id', $facultiesId)
                     ->orWhereIn('position_id', $positionsId)
                     ->orWhere('phone', 'like', $searchData)
-                    ->paginate(config('settings.paginate_default_val'));
+                    ->get();
                 break;
             case config('settings.condition_search.staffs.name'):
-                $staffs = User::where('name', 'like', $searchData)
-                    ->paginate(config('settings.paginate_default_val'));
+                $staffs = User::where('name', 'like', $searchData)->get();
                 break;
             case config('settings.condition_search.staffs.id'):
-                $staffs = User::where('id', 'like', $searchData)
-                    ->paginate(config('settings.paginate_default_val'));
+                $staffs = User::where('id', 'like', $searchData)->get();
                 break;
             case config('settings.condition_search.staffs.faculty'):
-                $staffs = User::whereIn('faculty_id', $facultiesId)
-                    ->paginate(config('settings.paginate_default_val'));
+                $staffs = User::whereIn('faculty_id', $facultiesId)->get();
                 break;
         }
 
@@ -284,7 +279,7 @@ class StaffController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                $staffsId = $request->staffsId;
+                $staffsId = $request->dataId;
                 $staffs = User::whereIn('id' ,$staffsId)->get();
 
                 if (!count($staffs)) {
@@ -303,7 +298,6 @@ class StaffController extends Controller
                 $request->session()->flash('successMsg', 'Xóa nhân viên thành công');
             });
         } catch (Exception $e) {
-            return $e->getMessage();
             $request->session()->flash('errorMsg', 'Xóa nhân viên thất bại');
         }
     }

@@ -19,7 +19,7 @@
                             {{ method_field('PUT') }}
                             <div class="col-lg-9">
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Họ và tên</label>
+                                    <label class="col-lg-3 control-label">Họ và tên(*)</label>
                                     <div class="col-lg-9">
                                         <input type="text" name="name" 
                                             class="form-control" 
@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Địa chỉ</label>
+                                    <label class="col-lg-3 control-label">Địa chỉ(*)</label>
                                     <div class="col-lg-9">
                                         <input type="text" name="address" 
                                             class="form-control" 
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Số điện thoại</label>
+                                    <label class="col-lg-3 control-label">Số điện thoại(*)</label>
                                     <div class="col-lg-9">
                                         <input type="text" name="phone" 
                                             class="form-control" 
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Email</label>
+                                    <label class="col-lg-3 control-label">Email(*)</label>
                                     <div class="col-lg-9">
                                         <input type="text" name="email" 
                                             class="form-control" 
@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Ngày sinh</label>
+                                    <label class="col-lg-3 control-label">Ngày sinh(*)</label>
                                     <div class="col-lg-5">
                                         <input type="date" name="birthday" 
                                             class="form-control" 
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Giới tính</label>
+                                    <label class="col-lg-3 control-label">Giới tính(*)</label>
                                     <div class="col-lg-5">
                                         <label class="gender-radio">
                                             <input type="radio" name="gender" value="1" {{ $staff->gender ? 'checked' : ''}}> Nam
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Khoa</label>
+                                    <label class="col-lg-3 control-label">Khoa(*)</label>
                                     <div class="col-lg-5">
                                         <select class="form-control" name="faculty_id" value="{{ $staff->faculty->id }}">
                                             @foreach ($faculties as $faculty)
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Chức vụ</label>
+                                    <label class="col-lg-3 control-label">Chức vụ(*)</label>
                                     <div class="col-lg-5">
                                         <select class="form-control" name="position_id" value="{{ $staff->position->id }}">
                                             @foreach ($positions as $position)
@@ -162,7 +162,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Trạng thái</label>
+                                        <label class="col-lg-3 control-label">Trạng thái(*)</label>
                                         <div class="col-lg-5">
                                             <select class="form-control" name="status" value="{{ $staff->status }}">
                                                 <option value="{{ config('settings.staff_status.active') }}">
@@ -181,7 +181,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Tài khoản</label>
+                                        <label class="col-lg-3 control-label">Tài khoản(*)</label>
                                         <div class="col-lg-9">
                                             <input type="text" name="account" 
                                                 class="form-control" 
@@ -198,7 +198,7 @@
                                     </div>
                                 @else 
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Quyền hạn:</label>
+                                        <label class="col-lg-3 control-label">Quyền hạn(*)</label>
                                         <label class="col-lg-9 control-label">
                                             <span class="label label-{{ $staff->role }} status-{{ $staff->status }}" id="staff-status">
                                                 {{ $staff->role_content }}
@@ -207,14 +207,14 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="hidden" name="account" value="{{ $staff->account }}">
-                                        <label class="col-lg-3 control-label">Tài khoản:</label>
+                                        <label class="col-lg-3 control-label">Tài khoản(*)</label>
                                         <label class="col-lg-9 control-label">
                                             {{ $staff->account }}
                                         </label>
                                     </div>
                                 @endif
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Mật khẩu</label>
+                                    <label class="col-lg-3 control-label">Mật khẩu(*)</label>
                                     <div class="col-lg-9">
                                         <input type="password" name="password" 
                                             class="form-control" 
@@ -228,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Xác nhận</label>
+                                    <label class="col-lg-3 control-label">Xác nhận(*)</label>
                                     <div class="col-lg-9">
                                         <input type="password" 
                                             name="password_confirmation" 

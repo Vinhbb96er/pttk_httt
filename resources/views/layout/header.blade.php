@@ -99,6 +99,40 @@
                             <a href="{{ route('staffs.create') }}"> Thêm nhân viên</a>
                         </li>
                     </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#">
+                        <i class="fa fa-user"></i> 
+                        Quản lý Bệnh nhân 
+                        <span class="pull-right">
+                            <i class="fa fa-chevron-right menu-icon-right"></i>
+                        </span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('patients.index') }}"> Danh sách bệnh nhân</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('patients.create') }}"> Thêm bệnh nhân</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has_sub">
+                    <a href="#">
+                        <i class="fa fa-user"></i> 
+                        Quản lý Bệnh án 
+                        <span class="pull-right">
+                            <i class="fa fa-chevron-right menu-icon-right"></i>
+                        </span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('medical-records.index') }}"> Danh sách bệnh án</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('medical-records.create') }}"> Thêm bệnh án</a>
+                        </li>
+                    </ul>
                 </li>  
                 <li class="has_sub">
                     <a href="#">

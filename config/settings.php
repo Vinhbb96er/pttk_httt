@@ -22,6 +22,7 @@ return [
     ],
     'upload_path' => [
         'staffs' => '/uploads/staffs/',
+        'patients' => '/uploads/patients/',
     ],
     'image_default' => [
         'no_image' => '/templates/img/no-image.jpeg',
@@ -32,6 +33,28 @@ return [
             'name' => 1,
             'id' => 2,
             'faculty' => 3,
+        ],
+        'patients' => [
+            'all' => 0,
+            'name' => 1,
+            'id' => 2,
+            'insurance_number' => 3,
+        ],
+
+        'medical_records' => [
+            'all' => 0,
+            'name' => 1,
+            'id' => 2,
+            'insurance_number' => 3,
+            'faculty' => 4,
+        ],
+    ],
+    'medical_record' => [
+        'status' => [
+            'leave' => 1,
+            'stay' => 2,
+            'move' => 3,
+            'other' => 4,
         ]
     ]
 ];
