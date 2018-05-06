@@ -1,5 +1,8 @@
 @extends('layout.master')
 
+@section('title', 'Quản lý nhân viên')
+@section('link', route('staffs.index'))
+
 @section('content')
     <div class="row">
         @include('commons.error')
@@ -49,11 +52,11 @@
                                     <th width="3%">No</th>
                                     <th width="7%">Mã NV</th>
                                     <th width="20%">Tên</th>
-                                    <th width="15%">Khoa</th>
-                                    <th width="15%">Chức vụ</th>
+                                    <th width="13%">Khoa</th>
+                                    <th width="13%">Chức vụ</th>
                                     <th width="13%">Quyền hạn</th>
                                     <th width="13%">SĐT</th>
-                                    <th width="14%">Thao tác</th>
+                                    <th width="17%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>

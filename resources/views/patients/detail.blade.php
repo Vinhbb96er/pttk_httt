@@ -1,5 +1,8 @@
 @extends('layout.master')
 
+@section('title', 'Quản lý bệnh nhân')
+@section('link', route('patients.index'))
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -85,7 +88,7 @@
                     </div>
                 </div>
                 <div class="widget-foot"></div>
-          </div>  
+            </div>  
         </div>
     </div>
 @endsection

@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <!-- Title and other stuffs -->
-    <title>Dashboard - MacAdmin</title>
+    <title>Bệnh viện Liên Chiểu - Đà Nẵng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -30,10 +30,10 @@
                             <!-- Dropdown menu -->
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#"><i class="fa fa-user"></i> Profile</a>
+                                    <a href="{{ route('profile.index') }}"><i class="fa fa-user"></i> Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-cogs"></i> Settings</a>
+                                    <a href="{{ route('profile.show', 'change-password') }}"><i class="fa fa-cogs"></i> Settings</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -59,11 +59,14 @@
         <div class="container">
             <div class="row">
                 <!-- Logo section -->
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <!-- Logo. -->
                     <div class="logo">
-                        <h1><a href="#">Mac<span class="bold">Admin</span></a></h1>
-                        <p class="meta">something goes in meta area</p>
+                        <marquee>
+                            <h1>
+                                <span class="logo-content">Bệnh viện Liên Chiểu Đà Nẵng</span><span class="bold"></span>
+                            </h1>
+                        </marquee>
                     </div>
                     <!-- Logo ends -->
                 </div>
@@ -81,7 +84,7 @@
             <ul id="nav">
                 <!-- Main menu with font awesome icon -->
                 <li class="open">
-                    <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
+                    <a href="{{ route('home') }}"><i class="fa fa-home"></i> Trang chủ</a>
                 </li>
                 <li class="has_sub">
                     <a href="#">
@@ -136,19 +139,19 @@
                 </li>  
                 <li class="has_sub">
                     <a href="#">
-                        <i class="fa fa-file-o"></i> 
-                        Pages #1  
+                        <i class="fa fa-user"></i> 
+                        Quản lý Tài khoản 
                         <span class="pull-right">
                             <i class="fa fa-chevron-right menu-icon-right"></i>
                         </span>
                     </a>
                     <ul>
-                        <li><a href="post.html">Post</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="support.html">Support</a></li>
-                        <li><a href="invoice.html">Invoice</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
+                        <li>
+                            <a href="{{ route('patients.index') }}"> Thông tin tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('patients.create') }}"> Đổi mật khẩu</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

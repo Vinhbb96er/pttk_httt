@@ -1,5 +1,8 @@
 @extends('layout.master')
 
+@section('title', 'Quản lý bệnh án')
+@section('link', route('medical-records.index'))
+
 @section('content')
     <div class="row">
         <div class="col-md-12">

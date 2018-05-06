@@ -1,5 +1,8 @@
 @extends('layout.master')
 
+@section('title', 'Quản lý nhân viên')
+@section('link', route('staffs.index'))
+
 @section('content')
     <div class="row">
         <div class="col-md-12">

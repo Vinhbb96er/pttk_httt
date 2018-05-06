@@ -4,12 +4,12 @@
 <div class="mainbar">
     <!-- Page heading -->
     <div class="page-head">
-        <h2 class="pull-left"><i class="fa fa-home"></i> Dashboard</h2>
+        <h2 class="pull-left"><i class="fa fa-home"></i> @yield('title')</h2>
         <!-- Breadcrumb -->
         <div class="bread-crumb pull-right">
-            <a href="index.html"><i class="fa fa-home"></i> Home</a> 
+            <a href="{{ route('home') }}"><i class="fa fa-home"></i> Trang chủ</a> 
             <span class="divider">/</span> 
-            <a href="#" class="bread-current">Dashboard</a>
+            <a href="@yield('link')" class="bread-current">@yield('title')</a>
         </div>
         <div class="clearfix"></div>
     </div>

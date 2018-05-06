@@ -39,4 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/ajax/search-medical-records', 'MedicalRecordController@search')->name('search_medical_record');
     
     Route::post('/ajax/delete-medical-records', 'MedicalRecordController@deleteMulti')->name('delete_medical_record');
+
+    // profile
+    Route::resource('/profile', 'ProfileController');
 });
