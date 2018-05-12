@@ -21,6 +21,7 @@ class Patient extends Model
         'image',
         'reception_date',
         'insurance_number',
+        'kind',
         'expiration_date',
     ];
 
@@ -33,6 +34,7 @@ class Patient extends Model
         'birthday_format',
         'reception_date_format',
         'expiration_date_format',
+        'kind_content',
     ];
 
     public function registrations()
@@ -90,5 +92,10 @@ class Patient extends Model
         if (!empty($this->attributes['reception_date'])) {
             return Carbon::parse($this->attributes['reception_date'])->format('d/m/Y');
         }
+    }
+
+    public function getKindContentAttribute()
+    {
+        return ($this->attributes['kind'] == 1) ? 'Nội trú' : 'Ngoại trú';   
     }
 }

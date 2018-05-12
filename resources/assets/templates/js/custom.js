@@ -61,6 +61,20 @@ $(document).ready(function(){
       }
   });
 
+  $(".sidebar-dropdown li").on('click',function(e){
+      e.preventDefault();
+
+      if(!$(this).hasClass("open")) {
+        // open our new menu and add the open class
+        $(".sidebar #nav").slideDown(350);
+        $(this).addClass("open");
+      }
+      
+      else{
+        $(".sidebar #nav").slideUp(350);
+        $(this).removeClass("open");
+      }
+  });
 });
 
 /* Widget close */
@@ -243,21 +257,10 @@ $(document).ready(function () {
             success: function (data) {}
         });
     });
+
+    $('.export-btn').on('click', function () {
+        $(this).next('.export-form').submit();
+
+        return false;
+    });
 });
-
-
-
-
-/* Date picker */
-
-// $(function() {
-//     $('#datetimepicker1').datetimepicker({
-//       pickTime: false
-//     });
-// });
-
-// $(function() {
-//     $('#datetimepicker2').datetimepicker({
-//       pickDate: false
-//     });
-// });

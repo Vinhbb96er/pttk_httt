@@ -120,9 +120,9 @@
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Khoa(*)</label>
                                     <div class="col-lg-5">
-                                        <select class="form-control" name="faculty_id" value="{{ $staff->faculty->id }}">
+                                        <select class="form-control" name="faculty_id" value="">
                                             @foreach ($faculties as $faculty)
-                                                <option value="{{ $faculty->id }}">
+                                                <option value="{{ $faculty->id }}" {{ $faculty->id == $staff->faculty->id ? 'selected' : '' }}>
                                                     {{ $faculty->name }}
                                                 </option>
                                             @endforeach
@@ -132,9 +132,9 @@
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Chức vụ(*)</label>
                                     <div class="col-lg-5">
-                                        <select class="form-control" name="position_id" value="{{ $staff->position->id }}">
+                                        <select class="form-control" name="position_id" value="">
                                             @foreach ($positions as $position)
-                                                <option value="{{ $position->id }}">
+                                                <option value="{{ $position->id }}" {{ $position->id == $staff->position->id ? 'selected' : '' }}>
                                                     {{ $position->name }}
                                                 </option>
                                             @endforeach
@@ -145,17 +145,11 @@
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Quyền hạn</label>
                                         <div class="col-lg-5">
-                                            <select class="form-control" name="role" value="{{ $staff->role }}">
-                                                <option value="{{ config('settings.staff_role.admin') }}">
-                                                    Admin
-                                                </option>
-                                                <option value="{{ config('settings.staff_role.front_desk_staff') }}">
-                                                    Nhân viên tiếp nhận
-                                                </option>
-                                                <option value="{{ config('settings.staff_role.faculty_staff') }}">
-                                                    Nhân viên khoa
-                                                </option>
-                                            </select>
+                                            {{ Form::select('role', [
+                                                config('settings.staff_role.admin') => 'Admin',
+                                                config('settings.staff_role.front_desk_staff') => 'Nhân viên tiếp nhận',
+                                                config('settings.staff_role.faculty_staff') => 'Nhân viên khoa'
+                                            ], $staff->role, ['class' => 'form-control']) }}
 
                                             @if ($errors->has('role'))
                                                 <span class="msg-danger">
@@ -167,15 +161,11 @@
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Trạng thái(*)</label>
                                         <div class="col-lg-5">
-                                            <select class="form-control" name="status" value="{{ $staff->status }}">
-                                                <option value="{{ config('settings.staff_status.active') }}">
-                                                    Hoạt động
-                                                </option>
-                                                <option value="{{ config('settings.staff_status.lock') }}">
-                                                    Bị khóa
-                                                </option>
-                                            </select>
-                                            
+                                            {{ Form::select('status', [
+                                                config('settings.staff_status.active') => 'Hoạt động',
+                                                config('settings.staff_status.lock') => 'Bị khóa',
+                                            ], $staff->status, ['class' => 'form-control']) }}
+
                                             @if ($errors->has('status'))
                                                 <span class="msg-danger">
                                                     <strong>{{ $errors->first('status') }}</strong>

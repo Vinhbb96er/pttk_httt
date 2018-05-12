@@ -135,6 +135,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-lg-3 control-label">Loại(*)</label>
+                                    <div class="col-lg-5">
+                                        {{ Form::select('kind', [
+                                            config('settings.patient_kind.internal') => 'Nội trú',
+                                            config('settings.patient_kind.external') => 'Ngoại trú',
+                                        ], $patient->kind, ['class' => 'form-control']) }}
+
+                                        @if ($errors->has('kind'))
+                                            <span class="msg-danger">
+                                                <strong>{{ $errors->first('kind') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-lg-3 control-label">Ngày tiếp nhận(*)</label>
                                     <div class="col-lg-5">
                                         <input type="date" name="reception_date" 

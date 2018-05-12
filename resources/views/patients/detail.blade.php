@@ -65,6 +65,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-lg-3 control-label">Loại:</label>
+                                    <label class="col-lg-9 control-label">
+                                        {{ $patient->kind_content }}
+                                    </label>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-lg-3 control-label">Ngày tiếp nhận:</label>
                                     <label class="col-lg-5 control-label">
                                         {{ $patient->reception_date_format }}

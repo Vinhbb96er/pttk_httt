@@ -2126,3 +2126,19 @@ footer .copy{
     font-weight: bold;
     text-shadow: 2px 2px 2px #757777;
 }
+
+.time-label {
+    float: left;
+    line-height: 33px;
+    width: 20px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+.report-btn {
+    width: 110px;
+}
+
+.resize-icon-report {
+    margin-top: -55px !important;
+}

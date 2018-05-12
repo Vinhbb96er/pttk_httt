@@ -88,15 +88,17 @@
                             <div class="form-group col-lg-12">
                                 <div class="form-btn-block">
                                     <a href="{{ route('staffs.index') }}" class="btn btn-md btn-default">Trở về</a>
-                                    <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-md btn-info">Chỉnh sửa</a>
-                                    @if ($staff->id != Auth::user()->id && $staff->role != config('settings.staff_role.super_admin'))
-                                        <button class="btn btn-md btn-lock-{{ $staff->status }}" id="lock-staff" val="{{ $staff->status }}" data-url="{{ route('change_status') }}" data-staff="{{ $staff->id }}">
-                                            {{ ($staff->status) ? 'Khóa' : 'Mở khóa' }}
-                                        </button>
-                                        {{ Form::open(['route' => ['staffs.destroy', $staff->id], 'class' => 'btn-form']) }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-md btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">Xóa</button>
-                                        {{ Form::close() }}
+                                    @if ($staff->role > Auth::user()->role)
+                                        <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-md btn-info">Chỉnh sửa</a>
+                                        @if ($staff->id != Auth::user()->id && $staff->role != config('settings.staff_role.super_admin'))
+                                            <button class="btn btn-md btn-lock-{{ $staff->status }}" id="lock-staff" val="{{ $staff->status }}" data-url="{{ route('change_status') }}" data-staff="{{ $staff->id }}">
+                                                {{ ($staff->status) ? 'Khóa' : 'Mở khóa' }}
+                                            </button>
+                                            {{ Form::open(['route' => ['staffs.destroy', $staff->id], 'class' => 'btn-form']) }}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-md btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">Xóa</button>
+                                            {{ Form::close() }}
+                                        @endif
                                     @endif
                                 </div>
                             </div>

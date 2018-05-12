@@ -34,8 +34,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'frontdesk@gmail.com',
             'role' => 2,
             'status' => 1,
-            'account' => 'front desk',
-            'password' => 'staff',
+            'account' => 'front desk staff',
+            'password' => '123123',
         ]);
 
         factory(App\Models\User::class, 1)->create([
@@ -43,8 +43,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'faculty@gmail.com',
             'role' => 3,
             'status' => 1,
-            'account' => 'faculty',
-            'password' => 'staff',
+            'account' => 'faculty staff',
+            'password' => '123123',
         ]);
 
         for ($i = 0; $i < 30; $i ++) {

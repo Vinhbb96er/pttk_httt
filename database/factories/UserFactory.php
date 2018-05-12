@@ -55,6 +55,7 @@ $factory->define(App\Models\Patient::class, function (Faker $faker) {
         'gender' => (bool) rand(0, 1),
         'address' => $faker->address,
         'phone' => $faker->randomNumber,
+        'kind' => rand(1, 2),
         'image' => $faker->image($dir = '/tmp', $width = 200, $height = 200),
         'reception_date' => $faker->date(),
         'insurance_number' => $faker->swiftBicNumber,

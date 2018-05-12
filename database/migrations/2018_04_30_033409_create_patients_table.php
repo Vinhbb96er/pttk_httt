@@ -20,6 +20,7 @@ class CreatePatientsTable extends Migration
             $table->date('birthday');
             $table->string('address');
             $table->string('phone');
+            $table->integer('kind');
             $table->string('image')->nullable();
             $table->date('reception_date');
             $table->string('insurance_number')->nullable();

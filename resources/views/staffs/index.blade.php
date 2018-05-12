@@ -83,14 +83,16 @@
                                                 <a href="{{ route('staffs.show', $staff->id) }}" class="btn btn-sm btn-success">
                                                     <i class="fa fa-eye"></i> 
                                                 </a>
-                                                <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </a>
-                                                @if ($staff->id != Auth::user()->id)
-                                                    {{ Form::open(['route' => ['staffs.destroy', $staff->id], 'class' => 'btn-form']) }}
-                                                        {{ method_field('DELETE') }}
-                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">
-                                                            <i class="fa fa-times"></i> 
-                                                        </button>
-                                                    {{ Form::close() }}
+                                                @if ($staff->role > Auth::user()->role)
+                                                    <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </a>
+                                                    @if ($staff->id != Auth::user()->id)
+                                                        {{ Form::open(['route' => ['staffs.destroy', $staff->id], 'class' => 'btn-form']) }}
+                                                            {{ method_field('DELETE') }}
+                                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">
+                                                                <i class="fa fa-times"></i> 
+                                                            </button>
+                                                        {{ Form::close() }}
+                                                    @endif
                                                 @endif
                                             @endif
                                         </td>

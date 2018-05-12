@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'web_icon' => '/templates/img/favicon.ico',
     'pre_id' => [
         'faculty' => 'K',
         'patient' => 'BN',
@@ -55,6 +56,21 @@ return [
             'stay' => 2,
             'move' => 3,
             'other' => 4,
+        ]
+    ],
+    'patient_kind' => [
+        'all' => 0,
+        'internal' => 1,
+        'external' => 2,
+    ],
+    'reports' => [
+        'patients' => [
+            'all_faculty' => 0,
+            'all_kind' => 0,
+        ],
+        'medical_record' => [
+            'all_status' => 0,
+            'all_faculty' => 0,
         ]
     ]
 ];

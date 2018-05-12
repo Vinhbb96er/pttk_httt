@@ -13,7 +13,7 @@
     {{ Html::style(asset('templates/css/style.css')) }}
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon/favicon.png">
+    <link rel="shortcut icon" href="{{ config('settings.web_icon') }}">
 </head>
 <body>
     <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
@@ -86,26 +86,31 @@
                 <li class="open">
                     <a href="{{ route('home') }}"><i class="fa fa-home"></i> Trang chủ</a>
                 </li>
+                @if (in_array(Auth::user()->role, [
+                    config('settings.staff_role.super_admin'),
+                    config('settings.staff_role.admin'),
+                ]))
+                    <li class="has_sub">
+                        <a href="#">
+                            <i class="fa fa-user-md"></i> 
+                            Quản lý Nhân viên 
+                            <span class="pull-right">
+                                <i class="fa fa-chevron-right menu-icon-right"></i>
+                            </span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('staffs.index') }}"> Danh sách nhân viên</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('staffs.create') }}"> Thêm nhân viên</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="has_sub">
                     <a href="#">
-                        <i class="fa fa-user"></i> 
-                        Quản lý Nhân viên 
-                        <span class="pull-right">
-                            <i class="fa fa-chevron-right menu-icon-right"></i>
-                        </span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('staffs.index') }}"> Danh sách nhân viên</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('staffs.create') }}"> Thêm nhân viên</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <a href="#">
-                        <i class="fa fa-user"></i> 
+                        <i class="fa fa-users"></i> 
                         Quản lý Bệnh nhân 
                         <span class="pull-right">
                             <i class="fa fa-chevron-right menu-icon-right"></i>
@@ -120,23 +125,33 @@
                         </li>
                     </ul>
                 </li>
-                <li class="has_sub">
-                    <a href="#">
-                        <i class="fa fa-user"></i> 
-                        Quản lý Bệnh án 
-                        <span class="pull-right">
-                            <i class="fa fa-chevron-right menu-icon-right"></i>
-                        </span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('medical-records.index') }}"> Danh sách bệnh án</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('medical-records.create') }}"> Thêm bệnh án</a>
-                        </li>
-                    </ul>
-                </li>  
+                @if (Auth::user()->role != config('settings.staff_role.front_desk_staff'))
+                    <li class="has_sub">
+                        <a href="#">
+                            <i class="fa fa-book"></i> 
+                            Quản lý Bệnh án 
+                            <span class="pull-right">
+                                <i class="fa fa-chevron-right menu-icon-right"></i>
+                            </span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('medical-records.index') }}"> Danh sách bệnh án</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('medical-records.create') }}"> Thêm bệnh án</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+                <li>
+                    <a href="{{ route('reports.patients.index') }}"><i class="fa fa-table"></i> Báo cáo, thống kê BN</a>
+                </li>
+                @if (Auth::user()->role != config('settings.staff_role.front_desk_staff'))
+                    <li>
+                        <a href="{{ route('reports.medicalrecords.index') }}"><i class="fa fa-table"></i> Báo cáo, thống kê BA</a>
+                    </li>
+                @endif
                 <li class="has_sub">
                     <a href="#">
                         <i class="fa fa-user"></i> 
@@ -147,10 +162,10 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('patients.index') }}"> Thông tin tài khoản</a>
+                            <a href="{{ route('profile.index') }}"> Thông tin tài khoản</a>
                         </li>
                         <li>
-                            <a href="{{ route('patients.create') }}"> Đổi mật khẩu</a>
+                            <a href="{{ route('profile.show', 'change-password') }}"> Đổi mật khẩu</a>
                         </li>
                     </ul>
                 </li>

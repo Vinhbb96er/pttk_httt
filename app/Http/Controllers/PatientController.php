@@ -53,6 +53,7 @@ class PatientController extends Controller
                 'phone',
                 'reception_date',
                 'insurance_number',
+                'kind',
                 'expiration_date',
             ]);
             $data['id'] = uniqid();
@@ -132,6 +133,7 @@ class PatientController extends Controller
                 'phone',
                 'reception_date',
                 'insurance_number',
+                'kind',
                 'expiration_date',
             ]);
 

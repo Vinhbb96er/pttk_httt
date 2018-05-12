@@ -30,6 +30,7 @@ class PatientRequest extends FormRequest
             'address' => 'required',
             'phone' => 'required|max:20',
             'insurance_number' => 'max:20',
+            'kind' => 'required|between:1,2',
             'reception_date' => 'required|date',
         ];
     }
@@ -48,6 +49,8 @@ class PatientRequest extends FormRequest
             'phone.required' => 'Bạn chưa nhập số điện thoại',
             'phone.max' => 'Số điện thoại chỉ chứa tối đa 20 ký tự',
             'insurance_number.max' => 'Mã BHYT chỉ chứa tối đa 20 ký tự',
+            'kind.required' => 'Bạn chưa chọn loại bệnh nhân',
+            'kind.between' => 'Gía trị sai',
             'reception_date.required' => 'Bạn chưa chọn ngày tiếp nhận',
             'reception_date.date' => 'Không phải là ngày tháng',
         ];
