@@ -83,7 +83,7 @@
                                                 <a href="{{ route('staffs.show', $staff->id) }}" class="btn btn-sm btn-success">
                                                     <i class="fa fa-eye"></i> 
                                                 </a>
-                                                @if ($staff->role > Auth::user()->role)
+                                                @if ($staff->role > Auth::user()->role || Auth::user()->role == config('settings.staff_role.super_admin'))
                                                     <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> </a>
                                                     @if ($staff->id != Auth::user()->id)
                                                         {{ Form::open(['route' => ['staffs.destroy', $staff->id], 'class' => 'btn-form']) }}

@@ -92,7 +92,6 @@
                                     <th width="11%">SĐT</th>
                                     <th width="16%">Địa chỉ</th>
                                     <th width="13%">Mã BHYT</th>
-                                    <th width="9%">Bệnh án</th>
                                     <th width="10%">Xem</th>
                                 </tr>
                             </thead>
@@ -106,11 +105,6 @@
                                         <td>{{ $patient->phone }}</td>
                                         <td>{{ str_limit($patient->address, 20) }}</td>
                                         <td>{{ $patient->insurance_number }}</td>
-                                        <td>
-                                            <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-sm btn-success">
-                                                <i class="fa fa-eye"></i> 
-                                            </a>
-                                        </td>
                                         <td>
                                             <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-sm btn-success">
                                                 <i class="fa fa-eye"></i> 

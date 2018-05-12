@@ -38,7 +38,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'address' => $faker->address,
         'phone' => $faker->randomNumber,
         'email' => $faker->unique()->safeEmail,
-        'image' => $faker->image($dir = '/tmp', $width = 200, $height = 200),
+        'image' => uniqid(rand(), true) . '.jpg',
         'role' => rand(1, 3),
         'account' => $faker->unique()->userName,
         'password' => 'secret',
@@ -56,7 +56,7 @@ $factory->define(App\Models\Patient::class, function (Faker $faker) {
         'address' => $faker->address,
         'phone' => $faker->randomNumber,
         'kind' => rand(1, 2),
-        'image' => $faker->image($dir = '/tmp', $width = 200, $height = 200),
+        'image' => uniqid(rand(), true) . '.jpg',
         'reception_date' => $faker->date(),
         'insurance_number' => $faker->swiftBicNumber,
         'expiration_date' => $faker->date(),
@@ -81,7 +81,7 @@ $factory->define(App\Models\MedicalRecord::class, function (Faker $faker) {
         'create_date' => $faker->date(),
         'patient_status' => $faker->paragraph(1),
         'bed_number' => $faker->swiftBicNumber,
-        'status' => rand(1, 3),
+        'status' => rand(1, 4),
         'note' => $faker->paragraph(2),
     ];
 });

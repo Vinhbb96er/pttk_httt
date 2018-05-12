@@ -88,7 +88,7 @@
                             <div class="form-group col-lg-12">
                                 <div class="form-btn-block">
                                     <a href="{{ route('staffs.index') }}" class="btn btn-md btn-default">Trở về</a>
-                                    @if ($staff->role > Auth::user()->role)
+                                    @if ($staff->role > Auth::user()->role || Auth::user()->role == config('settings.staff_role.super_admin'))
                                         <a href="{{ route('staffs.edit', $staff->id) }}" class="btn btn-md btn-info">Chỉnh sửa</a>
                                         @if ($staff->id != Auth::user()->id && $staff->role != config('settings.staff_role.super_admin'))
                                             <button class="btn btn-md btn-lock-{{ $staff->status }}" id="lock-staff" val="{{ $staff->status }}" data-url="{{ route('change_status') }}" data-staff="{{ $staff->id }}">
